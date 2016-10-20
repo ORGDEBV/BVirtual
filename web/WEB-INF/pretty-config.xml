@@ -1,0 +1,96 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" 
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+               xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+    
+
+    <url-mapping id="coming-soon">
+        <pattern value="/ComingSoon" />
+        <view-id value="/bv/comingsoon.html" />
+    </url-mapping>
+    
+    <url-mapping id="index-1">
+        <pattern value="/Home" />
+        <view-id value="/bv/index.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="index-2">
+        <pattern value="/Home-m" />
+        <view-id value="/bv/index-m.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="index-3">
+        <pattern value="/Home-e" />
+        <view-id value="/bv/index-explorer.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="general">
+        <pattern value="/General" />
+        <view-id value="/bv/general.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="documentos">
+        <pattern value="/Documentos" />
+        <view-id value="/bv/documentos.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="multimedia">
+        <pattern value="/Multimedia" />
+        <view-id value="/bv/multimedia.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="joyas">
+        <pattern value="/Joyas" />
+        <view-id value="/bv/joyas.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="digdocumentos">
+        <pattern value="/DigitalizacionDocumentos" />
+        <view-id value="/bv/digitalizacion_documentos.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="dicaudiovisual">
+        <pattern value="/DigitalizacionAudiovisual" />
+        <view-id value="/bv/digitalizacion_audiovisual.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="novedades">
+        <pattern value="/Novedades" />
+        <view-id value="/bv/novedades.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="novdetalle">
+        <pattern value="/NovedadDetalle" />
+        <view-id value="/bv/novedades_det.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="catalogo">
+        <pattern value="/Catalogo" />
+        <view-id value="/bv/catalogo.xhtml" />
+    </url-mapping>
+    <url-mapping id="vinilo">
+        <pattern value="/Vinilo" />
+        <view-id value="/bv/vinilo.xhtml" />
+    </url-mapping>
+      <url-mapping id="cd">
+        <pattern value="/cd" />
+        <view-id value="/bv/reproductoCd.xhtml" />
+    </url-mapping>
+    <url-mapping id="catalogo">
+        <pattern value="/Cassete" />
+        <view-id value="/bv/reproductor_cassete.xhtml" />
+    </url-mapping>
+    <url-mapping id="mapas">
+        <pattern value="/Imagen" />
+        <view-id value="/bv/mapas.xhtml" />
+    </url-mapping>
+     <url-mapping id="img">
+        <pattern value="/Img" />
+        <view-id value="/bv/visorImagenes.xhtml" />
+    </url-mapping>
+      <url-mapping id="vistaPdf">
+        <pattern value="/Pdf" />
+        <view-id value="/bv/pdf.xhtml" />
+    </url-mapping>
+        
+</pretty-config>

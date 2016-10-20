@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta charset="utf-8"/>
+        <title>Biblioteca Virtual</title>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="icon" href="../resources/img/icon.ico" type="image/ico"/>
+
+        <h:outputStylesheet name="css/internas.css"/>
+        <h:outputStylesheet name="css/reset.css" />
+        <h:outputStylesheet name="css/menu-style.css"/>
+
+        <h:outputScript name="js/jquery.min.js"/>
+        <h:outputScript name="js/jquery-ui.min.js"/>
+        <h:outputScript name="js/jquery.mobile.custom.min.js"/>
+        <h:outputScript name="js/main-menu.js"/>
+        <h:outputScript name="js/modernizr.js"/>
+        <h:outputScript name="js/jquery.slimscroll.min.js"/>
+        <h:outputScript name="js/isotope.pkgd.js"/>
+        <script>
+            $(document).ready(function () {
+                // init Isotope
+                var $grid = $('.grid-fillter').isotope({
+                    itemSelector: '.element-item',
+                    layoutMode: 'fitRows'
+                });
+                // filter functions
+                var filterFns = {
+                    // show if number is greater than 50
+                    numberGreaterThan50: function () {
+                        var number = $(this).find('.number').text();
+                        return parseInt(number, 10) > 50;
+                    },
+                    // show if name ends with -ium
+                    ium: function () {
+                        var name = $(this).find('.name').text();
+                        return name.match(/ium$/);
+                    }
+                };
+                // bind filter button click
+                $('.filters-button-group').on('click', 'button', function () {
+                    var filterValue = $(this).attr('data-filter');
+                    // use filterFn if matches value
+                    filterValue = filterFns[filterValue] || filterValue;
+                    $grid.isotope({
+                        filter: filterValue
+                    });
+                });
+                // change is-checked class on buttons
+                $('.button-group').each(function (i, buttonGroup) {
+                    var $buttonGroup = $(buttonGroup);
+                    $buttonGroup.on('click', 'button', function () {
+                        $buttonGroup.find('.is-checked').removeClass('is-checked');
+                        $(this).addClass('is-checked');
+                    });
+                });
+            });
+        </script>
+    </h:head>
+    <h:body>
+        <header class="cd-main-header">
+            <a class="cd-logo" href="/Bvirtual/bv/index.xhtml"></a>
+            <ul class="cd-header-buttons">
+                <li><a class="cd-nav-trigger" href="#cd-primary-nav">Menu<span></span></a></li>
+            </ul>
+        </header>
+        <main class="cd-main-content">
+            <div class="header-img triangulo-eventos" id="eventos-img-principal">
+            </div>
+            <div class="margen-internas" id="margen-conferencias-galeria">
+                <div class="site-map">
+                    <div class="left">
+                        <p>Eventos</p>
+                    </div>
+                    <div class="right active-eventos">
+                        <p>Conferencias</p>
+                    </div>
+                </div>
+                <h3 class="subtitulo">Eventos</h3>
+                <h1 class="titulo-principal">Conferencias</h1>
+                <div class="eventos-galeria">
+                    <div class="button-group filters-button-group">
+                        <button class="button is-checked fechas" data-filter="*">Todos</button>
+                        <button id="fecha2016" class="button fechas" data-filter=".figure-2016">2016</button>
+                        <button id="fecha2015" class="button fechas" data-filter=".figure-2015">2015</button>
+                        <button id="fecha2014" class="button fechas" data-filter=".figure-2014">2014</button>
+                        <button id="fecha2013" class="button fechas" data-filter=".figure-2013">2013</button>
+                    </div>
+
+                </div>
+                <div class="eventos-galeria grid-fillter">
+                    <figure class="effect-chico element-item figure-2016">
+                        <img src="resources/img/conferencias/biblioteca-virtual-conferencia-2016-01-thumb.jpg" alt="img15" />
+                        <figcaption>
+                            <div>
+                                <h2>V Programa de Historia del Arte Peruano</h2>
+                            </div>
+                            <a href="conferencia2016_1.xhtml">View more</a>
+                        </figcaption>
+                    </figure>
+                    <!--CONFERENCIAS 2015-->
+                    <figure class="effect-chico element-item figure-2015">
+                        <img src="resources/img/conferencias/biblioteca-virtual-conferencia-2015-04-thumb.jpg" alt="img15" />
+                        <figcaption>
+                            <div>
+                                <h2>Presentación del libro Nueva Crónica y Buen Gobierno</h2>
+                            </div>
+                            <a href="conferencia2015_4.xhtml">View more</a>
+                        </figcaption>
+                    </figure>
+                    <figure class="effect-chico element-item figure-2015">
+                        <img src="resources/img/conferencias/biblioteca-virtual-conferencia-2015-03-thumb.jpg" alt="img15" />
+                        <figcaption>
+                            <div>
+                                <h2>Garcilaso de la Vega, teólogo de los Incas</h2>
+                            </div>
+                            <a href="conferencia2015_3.xhtml">View more</a>
+                        </figcaption>
+                    </figure>
+                    <figure class="effect-chico element-item figure-2015">
+                        <img src="resources/img/conferencias/biblioteca-virtual-conferencia-2015-02-thumb.jpg" alt="img15" />
+                        <figcaption>
+                            <div>
+                                <h2>Ecos de Huarochirí: tras las huella de lo indígena en las Américas</h2>
+                            </div>
+                            <a href="conferencia2015_2.xhtml">View more</a>
+                        </figcaption>
+                    </figure>
+                    <figure class="effect-chico element-item figure-2015">
+                        <img src="resources/img/conferencias/biblioteca-virtual-conferencia-2015-01-thumb.jpg" alt="img15" />
+                        <figcaption>
+                            <div>
+                                <h2>La hoja sagrada: usos y abusos</h2>
+                            </div>
+                            <a href="conferencia2015_1.xhtml">View more</a>
+                        </figcaption>
+                    </figure>
+                    <figure class="effect-chico element-item figure-2015">
+                        <img src="resources/img/conferencias/biblioteca-virtual-conferencia-2015-05-thumb.jpg" alt="img15" />
+                        <figcaption>
+                            <div>
+                                <h2>IV Programa de Historia del Arte Peruano</h2>
+                            </div>
+                            <a href="conferencia2015_5.xhtml">View more</a>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="effect-chico element-item figure-2014">
+                        <img src="resources/img/conferencias/biblioteca-virtual-conferencia-2014-01-thumb.jpg" alt="img15" />
+                        <figcaption>
+                            <div>
+                                <h2>Orígenes, mitos y fiestas del Imperio inca</h2>
+                            </div>
+                            <a href="conferencia2014_1.xhtml">View more</a>
+                        </figcaption>
+                    </figure>
+                    <figure class="effect-chico element-item figure-2014">
+                        <img src="resources/img/conferencias/biblioteca-virtual-conferencia-2014-02-thumb.jpg" alt="img15" />
+                        <figcaption>
+                            <div>
+                                <h2>Cultura Ambiental en el Perú: desafíos y experiencias</h2>
+                            </div>
+                            <a href="conferencia2014_2.xhtml">View more</a>
+                        </figcaption>
+                    </figure>
+                    <figure class="effect-chico element-item figure-2014">
+                        <img src="resources/img/conferencias/biblioteca-virtual-conferencia-2014-03-thumb.jpg" alt="img15" />
+                        <figcaption>
+                            <div>
+                                <h2>Dr. David Samadi y el Robot Da Vinci</h2>
+                            </div>
+                            <a href="conferencia2014_3.xhtml">View more</a>
+                        </figcaption>
+                    </figure>
+                    <figure class="effect-chico element-item figure-2014">
+                        <img src="resources/img/conferencias/biblioteca-virtual-conferencia-2014-04-thumb.jpg" alt="img15" />
+                        <figcaption>
+                            <div>
+                                <h2>III Programa de Historia del Arte Peruano</h2>
+                            </div>
+                            <a href="conferencia2014_4.xhtml">View more</a>
+                        </figcaption>
+                    </figure>
+
+                    <figure class="effect-chico element-item figure-2013">
+                        <img src="resources/img/conferencias/biblioteca-virtual-conferencia-2013-02-thumb.jpg" alt="img15" />
+                        <figcaption>
+                            <div>
+                                <h2>La cultura del libro: aproximaciones desde la historia y el arte</h2>
+                            </div>
+                            <a href="conferencia2013_2.xhtml">View more</a>
+                        </figcaption>
+                    </figure>
+                    <figure class="effect-chico element-item figure-2013">
+                        <img src="resources/img/conferencias/biblioteca-virtual-conferencia-2013-01-thumb.jpg" alt="img15" />
+                        <figcaption>
+                            <div>
+                                <h2>El derecho de autor y el fomento de la lectura en la era digital</h2>
+                            </div>
+                            <a href="conferencia2013_1.xhtml">View more</a>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <ui:include src="templates/footer.xhtml" />
+            <ui:include src="templates/footer-copy.xhtml" />
+        </main>
+
+        <div class="cd-overlay"></div>
+        <ui:include src="templates/header.xhtml" />
+    </h:body>
+</html>
+

@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+
+        <script type="text/javascript" src="resources/js/jquery.min_2.js" ></script>
+        <script type="text/javascript" src="resources/js/jquery.mousewheel.min.js" ></script>
+
+        <script type="text/javascript" src="resources/js/jquery.iviewer.js" ></script>
+        <script type="text/javascript">
+            var iviewer = {};
+            $(document).ready(function () {
+                console.log("entro");
+                var url = localStorage.getItem('imagen');
+                var width = $(document).width();
+                var height = $(document).height();
+                $("#viewer").iviewer({
+                    src: url,
+                    width: width,
+                    height: height
+                });
+                myViewer.settings.width = myViewer.container.width();
+                myViewer.settings.height = myViewer.container.height();
+                ;
+            });
+            $(window).resize(centraViewer);
+
+            function centraViewer() {
+                var width = $(window).width();
+                var height = $(window).height();
+                $(".viewer").css({'width': width + 'px'})
+                $(".viewer").css({'height': height + 'px'})
+                myViewer.settings.width = width;
+                myViewer.settings.height = height;
+            }
+        </script>
+        <link rel="stylesheet" href="resources/js/jquery.iviewer.css" />
+        <style>
+            .viewer
+            {
+                min-width: 480px;
+                min-height: 480px;
+                width: 480px;
+                height: 480px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .wrapper
+            {
+                overflow: hidden;
+            }
+
+            body{
+                background: #ccc;
+            }
+        </style>
+
+
+    </h:head>
+    <body>
+        <div id="viewer" class="viewer"></div>
+    </body>
+</html>
+

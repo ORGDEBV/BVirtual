@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta charset="utf-8"/>
+        <title>Multimedia | Biblioteca Virtual</title>
+        <meta name="description" content="Biblioteca Virtual de la Biblioteca Nacional del Peru"/>
+        <meta name="keywords" content="BNP,Biblioteca Virtual,Antiguedades,Biblioteca Nacional,"/>
+        <meta name="author" content="Biblioteca Nacional del Peru"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="icon" href="resources/img/icon.ico" type="image/ico"/>
+
+        <h:outputStylesheet name="css/internas.css" />
+        <h:outputStylesheet name="css/reset.css"/>
+        <h:outputStylesheet name="css/menu-style.css"/>
+
+        <h:outputScript name="js/jquery.min.js"/>
+        <h:outputScript name="js/jquery-ui.min.js"/>
+        <h:outputScript name="js/jquery.mobile.custom.min.js"/>
+        <h:outputScript name="js/main-menu.js"/>
+        <h:outputScript name="js/modernizr.js"/>
+        <h:outputScript name="js/jquery.slimscroll.min.js"/>
+    </h:head>
+    <h:body>
+        <header class="cd-main-header">
+            <a class="cd-logo" href="/Bvirtual/bv/index.xhtml"></a>
+            <ul class="cd-header-buttons">
+                <!--<li><a class="cd-search-trigger" href="#cd-search">Search<span></span></a></li>-->
+                <li><a class="cd-nav-trigger" href="#cd-primary-nav">Menu<span></span></a></li>
+            </ul>
+            <!-- cd-header-buttons -->
+        </header>
+        <main class="cd-main-content">
+            <div class="header-img triangulo-faq" id="faq-img">
+            </div>
+
+            <div class="margen-internas">
+
+                <h1 class="titulo-principal">Preguntas Frecuentes</h1>
+                <p class="texto-general">Se ofrece aquí respuesta a una selección de preguntas más frequentes planteadas por los usuarios del servicio de consultas virtuales. El portal de Biblioteca Virtual está diseñado para animar a los usuarios a explorar los tesoros históricos
+                    del Perú. Las características del sitio se describen a continuación.</p>
+
+                <div id="options">
+                    <a href="javascript:parentAccordion.pr(1)">Mostrar Todas</a> | <a href="javascript:parentAccordion.pr(-1)">Ocultar Todas</a>
+                </div>
+
+                <ul class="acc" id="acc">
+                    <li>
+                        <h3>¿Qué es la Biblioteca Virtual?<span class="triangulito-faq"></span></h3>
+                        <div class="acc-section">
+                            <div class="acc-content">
+                                La Biblioteca Virtual es un área de la Biblioteca Nacional del Perú que organiza y gestiona acciones, programas y proyectos para la digitalización y difusión electrónica del patrimonio cultural documental y bibliográfico a fin de apoyar la formación integral de los miembros de la comunidad peruana y mundial.
+
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>¿Qué recursos tengo disponibles?<span class="triangulito-faq"></span></h3>
+                        <div class="acc-section">
+                            <div class="acc-content">
+                                Ofrecemos la versión digital de más de 10 000 documentos entre libros, manuscritos, cartas, fotografías, videos, audios y material diverso, elaborados a partir del patrimonio documental y bibliográfico que custodia la Biblioteca Nacional del Perú; obras que cuentan con la autorización respectiva para su difusión y contenidos externos que comprenden información relacionada con el desarrollo cultural de nuestro país.
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>¿Cómo funciona el buscador de la BV?<span class="triangulito-faq"></span></h3>
+                        <div class="acc-section">
+                            <div class="acc-content">
+                                Tan sólo tienes que insertar tu consulta en la barra de búsqueda tratando de hacerla lo más específica posible. Puedes usar la búsqueda avanzada o limitar la consulta una vez obtenidos los resultados. Además, para facilitar tu búsqueda podrás encontrar algunos tutoriales al respecto en nuestro canal de Youtube.
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>¿Puedo descargar o imprimir los libros electrónicos del catálogo?<span class="triangulito-faq"></span></h3>
+                        <div class="acc-section">
+                            <div class="acc-content">
+                                Disponemos de un gran catálogo de libros electrónicos que solo pueden ser visualizados. Si deseas obtener la versión en físico del material en cuestión, puedes acercarte a la Sala de Usuario de la BNP para solicitar el servicio de fotocopiado o digitalización.
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>¿Dónde puedo contactarme para presentar un reclamo o sugerencia?<span class="triangulito-faq"></span></h3>
+                        <div class="acc-section">
+                            <div class="acc-content">
+                                Si deseas reportar algún mal funcionamiento de la web o hacer alguna consulta, puedes escribir a bvirtual@bnp.gob.pe y, opcionalmente, enviar una captura de pantalla. Te contestaremos a la brevedad posible.
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+            <!--Fin Margen Internas-->
+
+
+            <ui:include src="templates/footer.xhtml" />
+            <ui:include src="templates/footer-copy.xhtml" />
+        </main>
+
+        <div class="cd-overlay"></div>
+        <ui:include src="templates/header.xhtml" />
+        <script type="text/javascript" src="resources/js/accordion.js"></script>
+
+        <script type="text/javascript">
+            var parentAccordion = new TINY.accordion.slider("parentAccordion");
+            parentAccordion.init("acc", "h3", 0, 0);
+
+            var nestedAccordion = new TINY.accordion.slider("nestedAccordion");
+            nestedAccordion.init("nested", "h3", 1, -1, "acc-selected");
+        </script>
+    </h:body>
+</html>
+

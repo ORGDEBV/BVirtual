@@ -1,0 +1,214 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+
+
+        <meta charset="utf-8"/>
+        <title>Biblioteca Virtual</title>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="resources/img/icon.ico" type="image/ico"/>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,800,400' rel='stylesheet' type='text/css' />
+        <link rel="stylesheet" type="text/css" href="resources/css/internas.css"/>
+        <link rel="stylesheet" href="resources/css/reset.css" />
+        <link rel="stylesheet" href="resources/css/menu-style.css" />
+        <link rel="stylesheet" href="resources/css/flickity.css" media="screen" />
+        <script src="resources/js/jquery.min.js"/>
+        <script src="resources/js/jquery-ui.min.js"/>
+        <script src="resources/js/jquery.mobile.custom.min.js"/>
+        <script src="resources/js/main-menu.js"/>
+        <script src="resources/js/modernizr.js"/>
+        <script src="resources/js/jquery.slimscroll.min.js"/>
+        <script src="resources/js/fb-share.js"/>
+        <script src="resources/js/flickity.pkgd.min.js"/>
+        <script>
+            $(document).ready(function () {
+                window.twttr = (function (d, s, id) {  
+                    var js, fjs = d.getElementsByTagName(s)[0],
+                                t = window.twttr || {};  
+                    if (d.getElementById(id))
+                        return t;  
+                    js = d.createElement(s);  
+                    js.id = id;  
+                    js.src = "https://platform.twitter.com/widgets.js";  
+                    fjs.parentNode.insertBefore(js, fjs);   
+                    t._e = [];  
+                    t.ready = function (f) {    
+                        t._e.push(f);  
+                    };   
+                    return t;
+                }(document, "script", "twitter-wjs"));
+            });
+        </script>
+        <script src="https://apis.google.com/js/platform.js" async="async" defer="defer">
+            {
+                lang: 'es'
+            }
+        </script>
+        <script>
+            function copyToClipboard() {
+                var url = window.location.href;
+                var $temp = $("<input/>");
+                $("body").append($temp);
+                $temp.val(url).select();
+                document.execCommand("copy");
+                $temp.remove();
+            }
+        </script>
+    </h:head>
+    <h:body>
+
+        <f:metadata>
+            <f:viewParam name="id" value="#{novedadDetalleBean.idNovedadselect}" />
+
+        </f:metadata>
+        <h:form id="frmListImagenes">
+            <f:event listener="#{novedadDetalleBean.loadNovedadDetalle()}" type="preRenderView"/>
+
+
+            <div id="fb-root"></div>
+            <header class="cd-main-header">
+                <h:outputLink styleClass="cd-logo" value="/Bvirtual/bv/index.xhtml" ></h:outputLink>
+
+                <ul class="cd-header-buttons">
+
+                    <li><a class="cd-nav-trigger" href="#cd-primary-nav">Menu<span></span></a></li>
+                </ul>
+
+            </header>
+            <script>
+                $(document).ready(function () {
+                    $('.novedades-carousel-main').flickity({
+                        cellAlign: 'center',
+                        contain: true,
+                        pageDots: false,
+                        wrapAround: false,
+                        imagesLoaded: true,
+                    });
+
+                    $('.novedades-carousel-nav').flickity({
+                        asNavFor: '.novedades-carousel-main',
+                        contain: true,
+                        pageDots: false,
+                        wrapAround: false,
+                        imagesLoaded: true,
+                    });
+                    $('.ultimasNoticias-carousel').flickity({
+                        cellAlign: 'left',
+                        contain: true,
+                        pageDots: false,
+                        wrapAround: true,
+                        imagesLoaded: true,
+                    });
+                });
+            </script>
+
+            <main class="cd-main-content">
+                <div class="header-img triangulo-novedades" id="novedades-img">
+                </div>
+                <div class="margen-internas" id="novedades-content">
+                    <div class="site-map clearfix">
+                        <div class="left">
+                            <p>Eventos</p>
+                        </div>
+                        <a href="Novedades">
+                            <div class="right active-novedades">
+                                <p>Novedades</p>
+                            </div>
+                        </a>
+                    </div>
+                    <h1 class="titulo-principal">Novedades</h1>
+                    <div class="box-comment clearfix">
+                        <div>
+                            <a onclick="copyToClipboard()" style="cursor:pointer;"><img src="resources/img/copiar_enlace.png" alt=""/></a>
+                            <div class="g-plus" data-action="share" data-annotation="bubble" data-height="20"></div>
+                            <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+                            <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-mobile-iframe="true" style="margin-top:2px"></div>
+                        </div>
+                    </div>
+                    <div class="novedades-header">
+                        <div>
+                            <h3>#{novedadDetalleBean.novedad.strFechaNovedad}</h3>
+                            <h1>#{novedadDetalleBean.novedad.TITULO_COMPLETO}</h1>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="col-60">
+                            <div style="text-align: justify;" id="contenidoBD">
+                                <p ><p:outputLabel value="#{novedadDetalleBean.novedad.CONTENIDO}" escape="false"/></p>
+                            </div>
+                            <div>
+
+
+                                    <div class="novedades-carousel-main">
+                                        <ui:repeat var="n" value="#{novedadDetalleBean.lstImagenes}">
+                                            <div class="novedades-celda">
+                                                <img src="#{n.URL_NOVEDAD}" alt="No se puede mostrar la imagen" />
+                                            </div>
+                                        </ui:repeat>
+                                       
+                                    </div>
+                                <p:panelGrid rendered="#{novedadDetalleBean.carruselVisible}">
+                                    <div  class="novedades-carousel-nav">
+                                        <ui:repeat var="n" value="#{novedadDetalleBean.lstImagenes}">
+                                            <div class="novedades-celda-nav">
+                                                <img src="#{n.URL_NOVEDAD}" alt="No se puede mostrar la imagen" />
+                                            </div>
+                                        </ui:repeat>
+                                        
+                                    </div>
+                                    
+                                </p:panelGrid>
+                                    
+
+
+                            </div>
+                        </div>
+                        <div class="col-40">
+                            <div class="fb-container">
+                                <div class="fb-comments" data-href="http://www.bvirtual.bnp.gob.pe/novedades_1.html" data-width="100%" data-numposts="3"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ultimas-noticias">
+                        <div>
+                            <h2>Últimas novedades</h2>
+                        </div>
+                        <div id="ulNovedades" class="ultimasNoticias-carousel">
+                            <c:forEach var="n" items="#{novedadDetalleBean.lstNovedadesUltimas}">
+                                <div class="ultimasNoticias-celda">
+                                    <figure>
+
+                                        <img src="#{n.dirImg2}" alt="Entrar" />
+                                        <figcaption>
+                                            <h3>#{n.TITULO_CORTO}</h3>
+                                            <a href="/Bvirtual/NovedadDetalle?id=#{n.ID_NOVEDADES}">Leer Noticia</a>
+                                        </figcaption>
+
+
+                                    </figure>
+                                </div>
+                            </c:forEach>
+                        </div>
+                    </div>
+
+
+                </div>
+                <ui:include src="templates/footer.xhtml" />
+                <ui:include src="templates/footer-copy.xhtml" />
+            </main>
+
+            <div class="cd-overlay"></div>
+            <ui:include src="templates/header.xhtml" />
+        </h:form>
+    </h:body>
+</html>
+

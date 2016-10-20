@@ -1,0 +1,766 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="utf-8"/>
+        <title>Biblioteca Virtual</title>
+        <!-- Mobile Specific Metas
+      ––––––––––––––––––––––––––––––––––––––––––––––––––-->
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="resources/img/icon.ico" type="image/ico"></link>
+        <h:outputStylesheet name="css/internas.css"/>
+        <h:outputStylesheet name="css/reset.css"/>
+        <h:outputStylesheet name="css/menu-style.css"/>
+        <h:outputScript name="js/jquery.min.js"/>
+        <h:outputScript name="js/jquery-ui.min.js"/>
+        <h:outputScript name="js/jquery.mobile.custom.min.js"/>
+        <h:outputScript name="js/main-menu.js"/>
+        <h:outputScript name="js/modernizr.js"/>
+        <h:outputScript name="js/jquery.slimscroll.min.js"/>
+        <h:outputScript name="js/boton_filtro_catalogo.js"/>
+        <script src="http://maps.google.com/maps/api/js?sensor=true|false" type="text/javascript"></script>
+        <script>
+
+            function realizaClick(idDocumental) {
+                var id = idDocumental;
+                var width = $(window).width() + 20;
+                if (width > 800) {
+                    $(".col-3").css({
+                        'background': '#005AA7'
+                    })
+                    $(".col-3--1").css({
+                        'display': 'inherit'
+                    })
+                    $(".col-3--2").css({
+                        'display': 'inherit'
+                    })
+                    $(".col-3--4").css({
+                        'display': 'inherit'
+                    })
+                    $(".col-3--5").css({
+                        'visibility': 'visible'
+                    })
+                    $(".descripcion").css({
+                        'display': 'inherit'
+                    })
+                    $(".flecha-filtros").css({
+                        'display': 'none'
+                    })
+                    $("#" + id + "_flecha").css({
+                        'display': 'block'
+                    });
+                } else {
+                    $(".col-3").css({
+                        'transform': 'translateX(0)',
+                        '-webkit-transform': 'translateX(0)',
+                        'background': '#005AA7'
+                    })
+                    $(".col-3--1").css({
+                        'display': 'inherit'
+                    })
+                    $(".col-3--2").css({
+                        'display': 'inherit'
+                    })
+                    $(".col-3--4").css({
+                        'display': 'inherit'
+                    })
+                    $(".col-3--5").css({
+                        'visibility': 'visible'
+                    })
+                    $(".descripcion").css({
+                        'display': 'inherit'
+                    })
+                }
+            }
+            function cargaNueva() {
+                $(".catalogo-close").click(function () {
+                    $(".col-3").css({
+                        'transform': 'translateX(100%)',
+                        '-webkit-transform': 'translateX(100%)',
+                        'background': '#005AA7'
+                    })
+                })
+                $(".resultados-filtro").click(function (event) {
+                    var id = event.currentTarget.id;
+                    var width = $(window).width() + 20;
+                    if (width > 800) {
+                        $(".col-3").css({
+                            'background': '#005AA7'
+                        })
+                        $(".col-3--1").css({
+                            'display': 'inherit'
+                        })
+                        $(".col-3--2").css({
+                            'display': 'inherit'
+                        })
+                        $(".col-3--4").css({
+                            'display': 'inherit'
+                        })
+                        $(".col-3--5").css({
+                            'visibility': 'visible'
+                        })
+                        $(".descripcion").css({
+                            'display': 'inherit'
+                        })
+                        $(".flecha-filtros").css({
+                            'display': 'none'
+                        })
+                        $("#" + id + "_flecha").css({
+                            'display': 'block'
+                        });
+                    } else {
+                        $(".col-3").css({
+                            'transform': 'translateX(0)',
+                            '-webkit-transform': 'translateX(0)',
+                            'background': '#005AA7'
+                        })
+                        $(".col-3--1").css({
+                            'display': 'inherit'
+                        })
+                        $(".col-3--2").css({
+                            'display': 'inherit'
+                        })
+                        $(".col-3--4").css({
+                            'display': 'inherit'
+                        })
+                        $(".col-3--5").css({
+                            'visibility': 'visible'
+                        })
+                        $(".descripcion").css({
+                            'display': 'inherit'
+                        })
+                    }
+                });
+                $(window).resize(function () {
+                    var width = $(window).width() + 20;
+                    if (800 > width) {
+                        $(".flecha-filtros").css({
+                            'display': 'none'
+                        })
+                    }
+                })
+            }
+            function compartirFacebook(titulo) {
+                var origin = window.location.origin;
+                var pathname = window.location.pathname;
+                window.open('http://www.facebook.com/sharer.php?u=' + origin + pathname + '?Busqueda=' + titulo, 'ventanacompartir', 'toolbar=0, status=0, width=650, height=450');
+            }
+
+            function compartirTwitter(titulo, codigo) {
+                var origin = window.location.origin;
+                var pathname = window.location.pathname;
+                if (titulo.length > 35) {
+                    titulo = titulo.slice(0, 35) + "...";
+                }
+                var url = origin + pathname + '?Busqueda=' + codigo;
+                alert(codigo);
+                codigo = codigo.replace(/ /g, '%20');
+                alert(codigo);
+                window.open('https://twitter.com/intent/tweet?text="' + titulo + '" http://bvirtual.bnp.gob.pe/Catalogo?Busqueda=123131312%20/%2012312321;hashtags=BibliotecaDigital,BibliotecaVirtual;via=BibliotecaBNP', 'ventanacompartir', 'toolbar=0, status=0, width=650, height=450');
+            }
+
+            function enLinea(tipo, url) {
+                switch (tipo) {
+                    case 'Audio':
+                        localStorage.audio = url;
+                        window.open('Vinilo', '_blank');
+                        break;
+                    case 'Fotografias':
+                        localStorage.imagen = url;
+                        window.open('Imagen', '_blank');
+                        break;
+                    case 'Video':
+                        window.open(url, '_blank');
+                        break;
+                    default :
+                        window.open(url, '_blank');
+                        break;
+                }
+                aumentarVisita();
+            }
+
+        </script>
+        <script>
+            window.twttr = (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0],
+                        t = window.twttr || {};
+                if (d.getElementById(id))
+                    return t;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "https://platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js, fjs);
+
+                t._e = [];
+                t.ready = function (f) {
+                    t._e.push(f);
+                };
+
+                return t;
+            }(document, "script", "twitter-wjs"));
+        </script>
+    </h:head>
+    <h:body>
+        <f:metadata>
+            <f:viewParam name="Material" value="#{documentalBean.gidmaterial}" />
+            <f:viewParam name="Biblioteca" value="#{documentalBean.gidbiblioteca}" />
+            <f:viewParam name="Coleccion" value="#{documentalBean.gidcoleccion}" />
+            <f:viewParam name="Busqueda" value="#{documentalBean.buscador}" />
+        </f:metadata>
+        <f:event listener="#{documentalBean.cargaFiltros()}" type="preRenderComponent"/>
+        <p:growl id="gMensaje" for="gMensaje" autoUpdate="false" life="500000" globalOnly="false" redisplay="false" showDetail="true"/>
+        <h:form id="formCatalogo">
+            <div class="catalogo-search">
+                <div class="logo-bv">
+                    <a href="/Bvirtual/Home"></a>
+                </div>
+                <div class="searchBar-interno">
+                    <p:inputText value="#{documentalBean.buscador}" type="search" placeholder="Búsqueda general..." styleClass="searchBar-input" onkeypress="if (event.keyCode == 13) {
+                                document.getElementById('formCatalogo:btnBuscar').click();
+                                return false;
+                            }"></p:inputText>
+                    <p:commandLink id="btnBuscar" styleClass="btn-search-interno" style="background: #0A61A8;" actionListener="#{documentalBean.realizarBusqueda()}">
+                        <ui:include src="resources/img/btn-lupa-interno.svg" />
+                    </p:commandLink>
+                </div>
+                <div class="comments">
+                    <a onclick="$('.col-3--5').css({'display': 'none'});
+                            $('.dlgComentario').css({'display': 'inherit'})">
+                        <figure>
+                            <ui:include src="resources/img/comentarios-boton.svg" />
+                            <figcaption>
+                                <p>Comentarios</p>
+                            </figcaption>
+                        </figure>
+                    </a>
+                    <a href="#">
+                        <figure>
+                            <ui:include src="resources/img/ayuda-boton.svg" />
+                            <figcaption>
+                                <p>Ayuda</p>
+                            </figcaption>
+                        </figure>
+                    </a>
+                </div>
+            </div>
+            <main class="contenido-catalogo">
+                <div class="container1">
+                    <div id="btnFiltros">
+                        <ui:include src="resources/img/filtros-boton.svg" />
+                    </div>
+                    <div class="col-1">
+                        <div id="liBiblioteca">
+                            <h3>Bibliotecas</h3>
+                            <p:selectCheckboxMenu
+                                label=""
+                                id="cboBiblioteca"
+                                filter="true" filterMatchMode="contains"
+                                required="false"
+                                widgetVar="cboBiblioteca"
+                                value="#{documentalBean.sbiblioteca}"
+                                style="width:20px">
+                                <p:ajax listener="#{documentalBean.checkBiblioteca()}"/>
+                                <f:selectItems value="#{documentalBean.bibliotecas}" var="biblioteca"  itemLabel="#{biblioteca.NOMBRE_BIBLIOTECA.toLowerCase()}" itemValue="#{biblioteca.ID_BIBLIOTECA_MEDIADOR}"/>
+                            </p:selectCheckboxMenu>
+                            <p:commandLink actionListener="#{documentalBean.qBiblioteca()}" disabled="false" id="qBiblioteca" style="color:#0062AF;cursor:pointer;float:right;font-size:13px;">Quitar filtros</p:commandLink>
+                        </div>
+                        <div id="liColeccion">
+                            <h3>Colecciones</h3>
+                            <p:selectCheckboxMenu
+                                label=""
+                                id="cboColeccion"
+                                filter="true" filterMatchMode="contains"
+                                required="false"
+                                widgetVar="cboColeccion"
+                                value="#{documentalBean.scoleccion}"
+                                style="width:20px">
+                                <p:ajax event="change" listener="#{documentalBean.checkColeccion()}"/>
+                                <f:selectItems value="#{documentalBean.colecciones}" var="coleccion"  itemLabel="#{coleccion.DESCRIPCION}" itemValue="#{coleccion.ID_COLECCION}"/>
+                            </p:selectCheckboxMenu>
+                            <p:commandLink actionListener="#{documentalBean.qColeccion()}" disabled="false" id="qColeccion" style="color:#0062AF;cursor:pointer;float:right;font-size:13px;">Quitar filtros</p:commandLink>
+                        </div>
+                        <div id="liTipo">
+                            <h3>Tipo</h3>
+                            <p:selectCheckboxMenu
+                                label=""
+                                id="cboTipo"
+                                filter="true" filterMatchMode="contains"
+                                required="false"
+                                widgetVar="cboTipo"
+                                value="#{documentalBean.stipo}"
+                                style="width:20px">
+                                <p:ajax event="change" listener="#{documentalBean.checkTipo()}"/>
+                                <f:selectItems value="#{documentalBean.tipos}" var="tipo"  itemLabel="#{tipo.TIPO}" itemValue="#{tipo.ID_TIPO}"/>
+                            </p:selectCheckboxMenu>
+                            <p:commandLink actionListener="#{documentalBean.qTipo()}" disabled="false" id="qTipo" style="color:#0062AF;cursor:pointer;float:right;font-size:13px;">Quitar filtros</p:commandLink>
+                        </div>
+                        <div id="liEspacial">
+                            <h3>Lugares</h3>
+                            <p:selectCheckboxMenu
+                                label=""
+                                id="cboEspacial"
+                                filter="true" filterMatchMode="contains"
+                                required="false"
+                                widgetVar="cboEspacial"
+                                value="#{documentalBean.sespacial}"
+                                style="width:20px">
+                                <p:ajax event="change" listener="#{documentalBean.checkEspacial()}"/>
+                                <f:selectItems value="#{documentalBean.espaciales}" var="espacial"  itemLabel="#{espacial.COBERTURA_ESPACIAL}" itemValue="#{espacial.ID_PAIS}"/>
+                            </p:selectCheckboxMenu>
+                            <p:commandLink actionListener="#{documentalBean.qEspacial()}" disabled="false" id="qEspacial" style="color:#0062AF;cursor:pointer;float:right;font-size:13px;">Quitar filtros</p:commandLink>
+                        </div>
+                        <div id="liTemporal">
+                            <h3>Cronología</h3>
+                            <p:selectCheckboxMenu
+                                label=""
+                                id="cboTemporal"
+                                filter="true" filterMatchMode="contains"
+                                required="false"
+                                widgetVar="cboTemporal"
+                                value="#{documentalBean.stemporal}"
+                                style="width:20px">
+                                <p:ajax event="change" listener="#{documentalBean.checkTemporal()}"/>
+                                <f:selectItems value="#{documentalBean.temporales}" var="temporal"  itemLabel="#{temporal.DESCRIPCION}" itemValue="#{temporal.ID_COBERTURA_TEMPORAL}"/>
+                            </p:selectCheckboxMenu>
+                            <p:commandLink actionListener="#{documentalBean.qTemporal()}" disabled="false" id="qTemporal" style="color:#0062AF;cursor:pointer;float:right;font-size:13px;">Quitar filtros</p:commandLink>
+                        </div>
+                        <div id="liAudiencia">
+                            <h3>Audiencia</h3>
+                            <p:selectCheckboxMenu
+                                label=""
+                                id="cboAudiencia"
+                                filter="true" filterMatchMode="contains"
+                                required="false"
+                                widgetVar="cboAudiencia"
+                                value="#{documentalBean.saudiencia}"
+                                style="width:20px">
+                                <p:ajax event="change" listener="#{documentalBean.checkAudiencia()}"/>
+                                <f:selectItems value="#{documentalBean.audiencias}" var="audiencia"  itemLabel="#{audiencia.AUDIENCIA}" itemValue="#{audiencia.ID_AUDIENCIA}"/>
+                            </p:selectCheckboxMenu>
+                            <p:commandLink actionListener="#{documentalBean.qAudiencia()}" disabled="false" id="qAudiencia" style="color:#0062AF;cursor:pointer;float:right;font-size:13px;">Quitar filtros</p:commandLink>
+                        </div>
+                    </div>
+                </div>
+                <div class="container2">
+                    <div class="filtros-overlay"></div>
+                    <div class="col-2">
+                        <div class="searchBar-interno">
+                            <p:inputText value="#{documentalBean.buscadorMovil}" type="search" placeholder="Búsqueda general..." styleClass="searchBar-input" onkeypress="if (event.keyCode == 13) {
+                                        document.getElementById('formCatalogo:btnBuscarMovil').click();
+                                        return false;
+                                    }"></p:inputText>
+                            <p:commandLink id="btnBuscarMovil" styleClass="btn-search-interno" style="background: #0A61A8;" actionListener="#{documentalBean.realizarBusquedaMovil()}">
+                                <ui:include src="resources/img/btn-lupa-interno.svg" />
+                            </p:commandLink>
+                        </div>
+                        <div class="orden-filtro">
+                            <div class="resultados">
+                                <p><p:outputLabel id="nResultado">#{documentalBean.listdocumental.size()}</p:outputLabel> resultados</p>
+                            </div>
+                            <div class="orden">
+                                <p>Ordenados por</p>
+                                <p:selectOneMenu value="#{documentalBean.campoOrder}">
+                                    <p:ajax event="change" listener="#{documentalBean.cambiaOrden()}"/>
+                                    <f:selectItem itemLabel="Título" itemValue="TITULO"/>
+                                    <f:selectItem itemLabel="Material" itemValue="TIPO"/>
+                                    <f:selectItem itemLabel="Departamento" itemValue="PROVINCIA"/>
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="forma">
+                                <p>de forma</p>
+                                <p:selectOneMenu value="#{documentalBean.ordenOrder}">
+                                    <p:ajax event="change" listener="#{documentalBean.cambiaOrden()}"/>
+                                    <f:selectItem itemLabel="Ascendente" itemValue="ASC"/>
+                                    <f:selectItem itemLabel="Descendente" itemValue="DESC"/>
+                                </p:selectOneMenu>
+                            </div>
+                        </div>
+                        <p:dataList widgetVar="listCatalogo" id="listCatalogo" value="#{documentalBean.listdocumental}" var="doc" type="ordered">
+                            <p:commandLink actionListener="#{documentalBean.selectDocumental(doc.ID_DOCUMENTAL)}">
+                                <div id="#{doc.ID_DOCUMENTAL}" class="resultados-filtro">
+                                    <div class="item-filtro" style="position:relative;">
+                                        <div>
+                                            <img src="resources/img/#{doc.LOGOTIPO}" alt="" />
+                                            <div>
+                                                <h3>#{doc.BIBLIOTECA_FUENTE.toUpperCase()} / #{doc.PROVINCIA} / #{doc.DISTRITO}</h3>
+                                                <p><span>#{doc.TITULO}</span></p>
+                                                <p>#{doc.AUTORES}</p>
+                                                <p><span>Editorial:</span> #{doc.EDITORIAL}</p>
+                                                <p><span>Material:</span> #{doc.TIPO} - #{doc.PERFIL}</p>
+                                                <div class="rating">
+                                                    <p:rating value="#{doc.NRO_VISITAS}" readonly="true" cancel="false"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flecha-filtros" id="#{doc.ID_DOCUMENTAL}_flecha"></div>
+                                </div>
+                            </p:commandLink>
+                        </p:dataList>
+                        <div id="divVerMas">
+                            <p:commandButton value="Cargar Más" actionListener="#{documentalBean.cargarMas()}" styleClass="btnVerMas" />
+                        </div>
+                        <h:panelGroup id="emptyCatalogo" layout="block">
+                            <div id="NO_HAY" class="resultados-filtro">
+                                <div class="item-filtro">
+                                    <div>
+                                        <img src="resources/img/lupa.png" alt=""/>
+                                        <div>
+                                            <h3>A continuación encuentra algunas sugerencias para mejorar su búsqueda:</h3>
+                                            • Intente incluir recursos que no pertenezcan a las colecciones de la biblioteca <br/>
+                                            • Revise la escritura de la búsqueda <br/>
+                                            • Use menos términos de búsqueda <br/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flecha-filtros" id="NO_HAY_flecha"></div>
+                            </div>
+                        </h:panelGroup>
+                    </div>
+                    <h:panelGroup layout="block" styleClass="col-3" id="detalleDocumental">
+                        <div class="col-3--1">
+                            <p:remoteCommand name="aumentarVisita" actionListener="#{documentalBean.aumentarVisita}" />
+                            <a onclick="enLinea('#{documentalBean.documental.TIPO}', '#{documentalBean.documental.URL}')">
+                                <p>Ver en linea</p>
+                            </a>
+                            <div class="catalogo-close">
+                                <span class="close2 clearfix"></span>
+                                <span class="close1 clearfix"></span>
+                            </div>
+                            <div> 
+                                <a href="javascript: void(0);"
+                                   onclick="compartirTwitter('#{documentalBean.documental.TITULO}', '#{documentalBean.documental.OTRO}')">
+                                    <ui:include src="resources/img/twitter-boton.svg" />
+                                </a>
+                            </div>
+                            <div>
+                                <a href="javascript: void(0);" 
+                                   onclick="compartirFacebook('#{documentalBean.documental.TITULO}')">
+                                    <ui:include src="resources/img/facebook-boton.svg" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-3--2">
+                            <p style="font-weight: bold;">Titulo: </p>
+                            <p>#{documentalBean.documental.TITULO}</p>
+                            <c:if test="#{documentalBean.documental.TITULO_ALTERNATIVO != ''}">
+                                <p style="font-weight: bold;">Título Alternativo: </p>
+                                <p> #{documentalBean.documental.TITULO_ALTERNATIVO}</p>
+                            </c:if>
+                            <c:if test="#{documentalBean.lautor.size() > 0}">
+                                <p style="font-weight: bold;">Autor(es): </p>
+                                <p:dataList id="lAutores" widgetVar="lAutores"  value="#{documentalBean.lautor}"  var="a" emptyMessage="No hay autores registrados." itemType="circle">
+                                    • #{a.NOMBRE}
+                                </p:dataList>
+                            </c:if>
+                            <c:if test="#{documentalBean.lcontribuidor.size() > 0}">
+                                <p style="font-weight: bold;">Contribuidor(es): </p>
+                                <p:dataList id="lContribuidores" widgetVar="lContribuidores"  value="#{documentalBean.lcontribuidor}"  var="c" emptyMessage="No hay contribuidores registrados." itemType="circle">
+                                    • #{c.CONTRIBUIDOR}
+                                </p:dataList>
+                            </c:if>
+                            <c:if test="#{documentalBean.documental.EDITORIAL != ''}">
+                                <p style="font-weight: bold;">Editorial:</p>
+                                <p> #{documentalBean.documental.EDITORIAL}</p>
+                            </c:if>
+                            <c:if test="#{documentalBean.documental.TIENE_COMO_VERSION != ''}">
+                                <p style="font-weight: bold;">Version: </p>
+                                <p> #{documentalBean.documental.TIENE_COMO_VERSION}</p>
+                            </c:if>
+                            <c:if test="#{documentalBean.documental.COBERTURA_ESPACIAL != ''}">
+                                <p style="font-weight: bold;">Cobertura Espacial: </p>
+                                <p>#{documentalBean.documental.COBERTURA_ESPACIAL}</p>
+                            </c:if>
+                            <c:if test="#{documentalBean.documental.FECHA_PUBLICACION != ''}">
+                                <p style="font-weight: bold;">Fecha publicación: </p>
+                                <p>#{documentalBean.documental.FECHA_PUBLICACION}</p>
+                            </c:if>
+                            <c:if test="#{documentalBean.documental.COBERTURA_TEMPORAL != ''}">
+                                <p style="font-weight: bold;">Cronología: </p>
+                                <p> #{documentalBean.documental.COBERTURA_TEMPORAL}</p>
+                            </c:if>
+                            <c:if test="#{documentalBean.lcoleccion.size() > 0}">
+                                <p style="font-weight: bold;">Coleccion(es): </p>
+                                <p:dataList id="lColecciones" widgetVar="lColecciones"  value="#{documentalBean.lcoleccion}"  var="c" emptyMessage="No hay colecciones registrados." itemType="circle">
+                                    • #{c.DESCRIPCION}
+                                </p:dataList>
+                            </c:if>
+                            <c:if test="#{documentalBean.lserie.size() > 0}">
+                                <p style="font-weight: bold;">Serie(s): </p>
+                                <p:dataList id="lSeries" widgetVar="lSeries"  value="#{documentalBean.lserie}"  var="s" emptyMessage="No hay series registrados." itemType="circle">
+                                    • #{s.SERIE}
+                                </p:dataList>
+                            </c:if>
+                            <p style="font-weight: bold;">Material: </p>
+                            <p> #{documentalBean.documental.TIPO}</p>
+                            <c:if test="#{documentalBean.llenguaje.size() > 0}">
+                                <p style="font-weight: bold;">Lenguaje(s): </p>
+                                <p:dataList id="lLenguajes" widgetVar="lLenguajes"  value="#{documentalBean.llenguaje}"  var="l" emptyMessage="No hay lenguajes registrados." itemType="circle">
+                                    • #{l.LENGUAJE}
+                                </p:dataList>
+                            </c:if>
+                            <c:if test="#{documentalBean.ltema.size() > 0}">
+                                <p style="font-weight: bold;">Tema(s): </p>
+                                <p:dataList id="lTemas" widgetVar="lTemas"  value="#{documentalBean.ltema}"  var="t" emptyMessage="No hay temas registrados." itemType="circle">
+                                    • #{t.TEMA}
+                                </p:dataList>
+                            </c:if>
+                            <c:if test="#{documentalBean.documental.DESCRIPCION != ''}">
+                                <p style="font-weight: bold;">Descripción: </p>
+                                <p>#{documentalBean.documental.DESCRIPCION}</p>
+                            </c:if>
+                            <c:if test="#{documentalBean.documental.AUDIENCIA != ''}">
+                                <p style="font-weight: bold;">Audiencia: </p>
+                                <p>#{documentalBean.documental.AUDIENCIA}</p>
+                            </c:if>
+                            <c:if test="#{documentalBean.documental.FORMATO != ''}">
+                                <p style="font-weight: bold;">Formato: </p>
+                                <p>#{documentalBean.documental.FORMATO}</p>
+                            </c:if>
+                            <c:if test="#{documentalBean.documental.FORMATO_EXTENSION != ''}">
+                                <p style="font-weight: bold;">Peso: </p>
+                                <p>#{documentalBean.documental.FORMATO_EXTENSION}</p>
+                            </c:if>
+                            <c:if test="#{documentalBean.documental.ID_PERFIL == '1'}">
+                                <p style="font-weight: bold;">N° de Imagenes: </p>
+                                <p>#{documentalBean.documental.NUMERO_PAGINAS}</p>
+                            </c:if>
+                            <c:if test="#{documentalBean.documental.ID_PERFIL == '6'}">
+                                <p style="font-weight: bold;">Duración: </p>
+                                <p>#{documentalBean.documental.NUMERO_PAGINAS}</p>
+                            </c:if>
+                            <c:if test="#{documentalBean.documental.FORMATO_MEDIO_DESCRIPCION != ''}">
+                                <p style="font-weight: bold;">Medio: </p>
+                                <p>#{documentalBean.documental.FORMATO_MEDIO_DESCRIPCION}</p>
+                            </c:if>
+                            <p style="font-weight: bold;">Código: </p>
+                            <p>#{documentalBean.documental.OTRO}</p>
+                            <c:if test="#{documentalBean.documental.NOTA != ''}">
+                                <p style="font-weight: bold;">Nota: </p>
+                                <p>#{documentalBean.documental.NOTA}</p>
+                            </c:if>
+                        </div>
+                        <div class="col-3--4">
+                            <p style="font-weight: bold;">#{documentalBean.documental.BIBLIOTECA_FUENTE}</p>
+                            <p style="font-weight: bold;">#{documentalBean.documental.DIRECCION}</p>
+                            <p style="font-weight: bold;">#{documentalBean.documental.DISTRITO}</p>
+                            <p style="font-weight: bold;">#{documentalBean.documental.PROVINCIA}</p>
+                            <p style="font-weight: bold;">#{documentalBean.documental.REGION}</p>
+                        </div>
+                        <div class="col-3--5">
+                            <p:gmap id="map"
+                                    center="-12.087401054499086,-77.00552210211754"
+                                    zoom="15"
+                                    type="ROADMAP"
+                                    style="width:100%;height:200px"
+                                    model="#{documentalBean.emptyModel}"
+                                    widgetVar="map" >
+                            </p:gmap>
+                        </div>
+                    </h:panelGroup>
+                </div>
+            </main>
+        </h:form>
+        <h:form id="formComentario">
+            <h:panelGroup layout="block" style="display:none;" styleClass="dlgComentario">
+                <div id="comentario-catalogo">
+                    <div>
+                        <div class="close-commentario-catalogo" onclick="$('.col-3--5').css({'display': 'inherit'});
+                                $('.dlgComentario').css({'display': 'none'})">
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <p>Nombre *</p>
+                        <p:inputText value="#{comentarioBean.comentario.NOMBRE}"></p:inputText>
+                        <p>Email</p>
+                        <p:inputText value="#{comentarioBean.comentario.CORREO_ELECTRONICO}" placeholder="ejemplo@ejemplo.com"></p:inputText>
+                        <p>Mensaje *</p>
+                        <p:inputTextarea value="#{comentarioBean.comentario.COMENTARIO}" rows="5" cols="1" placeholder="Apreciamos sus comentarios o sugerencias para mejorar la página web."></p:inputTextarea>
+                        <p:commandButton value="Enviar" action="#{comentarioBean.creaComentario()}"></p:commandButton>
+                    </div>
+                </div>
+            </h:panelGroup>
+        </h:form>
+        <script>
+            $(document).ready(function () {
+                cargaPagina();
+                disBiblioteca(1);
+                disColeccion(1);
+                disTipo(1);
+                disEspacial(1);
+                disTemporal(1);
+                disAudiencia(1);
+            })
+            function cargaPagina() {
+                $("#formCatalogo\\:cboBiblioteca_panel").appendTo("#liBiblioteca");
+                $("#formCatalogo\\:qBiblioteca").appendTo("#liBiblioteca");
+                $("#formCatalogo\\:cboColeccion_panel").appendTo("#liColeccion");
+                $("#formCatalogo\\:qColeccion").appendTo("#liColeccion");
+                $("#formCatalogo\\:cboTipo_panel").appendTo("#liTipo");
+                $("#formCatalogo\\:qTipo").appendTo("#liTipo");
+                $("#formCatalogo\\:cboEspacial_panel").appendTo("#liEspacial");
+                $("#formCatalogo\\:qEspacial").appendTo("#liEspacial");
+                $("#formCatalogo\\:cboTemporal_panel").appendTo("#liTemporal");
+                $("#formCatalogo\\:qTemporal").appendTo("#liTemporal");
+                $("#formCatalogo\\:cboAudiencia_panel").appendTo("#liAudiencia");
+                $("#formCatalogo\\:qAudiencia").appendTo("#liAudiencia");
+            }
+            function displayListado(bool) {
+                if (bool == 0) {
+                    $("#formCatalogo\\:listCatalogo").css({'display': 'none'});
+                    $("#formCatalogo\\:emptyCatalogo").css({'display': 'inherit'});
+                } else if (bool == 1) {
+                    $("#formCatalogo\\:emptyCatalogo").css({'display': 'none'});
+                    $("#formCatalogo\\:listCatalogo").css({'display': 'inherit'});
+                }
+            }
+            function disBiblioteca(bool) {
+                if (bool == 0) {
+                    $("#formCatalogo\\:qBiblioteca").removeClass("ui-state-disabled");
+                } else if (bool == 1) {
+                    $("#formCatalogo\\:qBiblioteca").addClass("ui-state-disabled");
+                }
+            }
+            function disColeccion(bool) {
+                if (bool == 0) {
+                    $("#formCatalogo\\:qColeccion").removeClass("ui-state-disabled");
+                } else if (bool == 1) {
+                    $("#formCatalogo\\:qColeccion").addClass("ui-state-disabled");
+                }
+            }
+            function disTipo(bool) {
+                if (bool == 0) {
+                    $("#formCatalogo\\:qTipo").removeClass("ui-state-disabled");
+                } else if (bool == 1) {
+                    $("#formCatalogo\\:qTipo").addClass("ui-state-disabled");
+                }
+            }
+            function disEspacial(bool) {
+                if (bool == 0) {
+                    $("#formCatalogo\\:qEspacial").removeClass("ui-state-disabled");
+                } else if (bool == 1) {
+                    $("#formCatalogo\\:qEspacial").addClass("ui-state-disabled");
+                }
+            }
+            function disTemporal(bool) {
+                if (bool == 0) {
+                    $("#formCatalogo\\:qTemporal").removeClass("ui-state-disabled");
+                } else if (bool == 1) {
+                    $("#formCatalogo\\:qTemporal").addClass("ui-state-disabled");
+                }
+            }
+            function disAudiencia(bool) {
+                if (bool == 0) {
+                    $("#formCatalogo\\:qAudiencia").removeClass("ui-state-disabled");
+                } else if (bool == 1) {
+                    $("#formCatalogo\\:qAudiencia").addClass("ui-state-disabled");
+                }
+            }
+        </script>
+        <style>
+
+            .ui-chkbox .ui-chkbox-box{
+                -webkit-appearance: checkbox;
+            }
+            .ui-selectcheckboxmenu-header .ui-chkbox{
+                display: none;
+            }
+            .ui-selectcheckboxmenu-panel{
+                box-shadow:none;
+                display: block !important;
+                position: relative !important;
+                top: 0px !important;
+                left: 0px !important;
+                opacity: 1 !important;
+            }
+            .ui-chkbox-box .ui-icon-check {
+                border-radius: 0px;
+                background-image: none !important;
+                background-size: 100%;
+                position: relative;
+                background-position: center;
+                background-color: transparent;
+                border-bottom: solid 3px #26c6da;
+                border-right: solid 3px #26c6da;
+                width: 5px;
+                height: 10px;
+                margin-left: 7px;
+                margin-top: 0px;
+                -webkit-transition: all 0.3s ease;
+                -moz-transition: all 0.3s ease;
+                -ms-transition: all 0.3s ease;
+                -o-transition: all 0.3s ease;
+                transition: all 0.3s ease;
+                -webkit-transform: rotate(45deg) scale(1.7);
+                -moz-transform: rotate(45deg) scale(1.7);
+                -o-transform: rotate(45deg) scale(1.7);
+                -ms-transform: rotate(45deg) scale(1.7);
+                transform: rotate(45deg) scale(1.7);
+            }
+            .ui-selectcheckboxmenu{
+                display:none !important;
+            }
+            .ui-selectcheckboxmenu-header .ui-inputfield{
+                width:100% !important;
+            }
+            .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-items-wrapper{
+                height: 100% !important;
+                max-height: 270px !important;
+            }
+            .ui-selectcheckboxmenu-header{
+                padding: 0px !important;
+            }
+            .ui-selectcheckboxmenu-header .ui-selectcheckboxmenu-filter-container{
+                width: 98%;
+            }
+            .ui-selectcheckboxmenu-panel .ui-selectcheckboxmenu-list-item label{
+                font-size:14px;
+            }
+            .ui-shadow{
+                box-shadow: none;
+            }
+            .ui-dialog .ui-dialog-content{
+                z-index:99;
+            }
+            .ui-state-disabled{
+                color:grey !important;
+                pointer-events: none;
+            }
+            .ui-selectcheckboxmenu-panel{
+                text-align:right;
+            }
+            #gMensaje_container{
+                background-color: white;
+                border-radius: 20px;
+            }
+            .ui-growl-icon-close {
+                background-image: url("javax.faces.resources/img/delete-gray.svg");
+            }
+            .ui-icon{
+                background-position: center !important;
+                background-size: 130% !important;
+            }
+            .ui-rating-star a, .ui-rating-cancel a{
+                background: url("/Bvirtual/bv/javax.faces.resource/img/rating.png") no-repeat 0 0;
+            }
+            .ui-rating-star a {
+                background-position: 0 -32px !important;
+            }
+            .ui-rating-star-on a {
+                background-position: 0 -48px !important;
+            }
+            .ui-dialog{
+                width: 10% !important;
+            }
+        </style>
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+        <p:dialog widgetVar="statusDialog" id="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <p:graphicImage name="img/preloader4.gif"/>
+        </p:dialog>
+    </h:body>
+</html>

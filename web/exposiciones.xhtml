@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <meta charset="utf-8"/>
+        <title>Multimedia | Biblioteca Virtual</title>
+        <meta name="description" content="Biblioteca Virtual de la Biblioteca Nacional del Peru"/>
+        <meta name="keywords" content="BNP,Biblioteca Virtual,Antiguedades,Biblioteca Nacional,"/>
+        <meta name="author" content="Biblioteca Nacional del Peru"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="icon" href="resources/img/icon.ico" type="image/ico"/>
+
+        <h:outputStylesheet name="css/internas.css" />
+        <h:outputStylesheet name="css/reset.css"/>
+        <h:outputStylesheet name="css/menu-style.css"/>
+
+        <h:outputScript name="js/jquery.min.js"/>
+        <h:outputScript name="js/jquery-ui.min.js"/>
+        <h:outputScript name="js/jquery.mobile.custom.min.js"/>
+        <h:outputScript name="js/main-menu.js"/>
+        <h:outputScript name="js/modernizr.js"/>
+        <h:outputScript name="js/jquery.slimscroll.min.js"/>
+    </h:head>
+    <h:body>
+        <header class="cd-main-header">
+            <a class="cd-logo" href="/Bvirtual/bv/index.xhtml"></a>
+            <ul class="cd-header-buttons">
+                <!--<li><a class="cd-search-trigger" href="#cd-search">Search<span></span></a></li>-->
+                <li><a class="cd-nav-trigger" href="#cd-primary-nav">Menu<span></span></a></li>
+            </ul>
+            <!-- cd-header-buttons -->
+        </header>
+        <main class="cd-main-content">
+            <div class="header-img triangulo-eventos" id="exposiciones-img">
+            </div>
+            <div class="margen-internas">
+                <div class="site-map">
+                    <div class="left">
+                        <p>Eventos</p>
+                    </div>
+                    <div class="right active-eventos">
+                        <p>Exposiciones</p>
+                    </div>
+                </div>
+                <h3 class="subtitulo">Eventos</h3>
+                <h1 class="titulo-principal">Exposiciones</h1>
+                <div class="eventos-galeria">
+                </div>
+                <div class="eventos-galeria">
+                    <figure class="effect-apollo">
+                        <img src="resources/img/exposiciones/biblioteca-virtual-exposiciones-img01.jpg" alt="img15" />
+                        <figcaption>
+                            <h2>Retratando Lima<br/><span>Archivo Courret Hnos</span></h2>
+                            <p>2015</p>
+                            <a href="http://bvirtual.bnp.gob.pe/bivi/exposiciones/courret/Library.html" target="_blank">View more</a>
+                        </figcaption>
+                    </figure>
+                    <figure class="effect-apollo">
+                        <img src="resources/img/exposiciones/biblioteca-virtual-exposiciones-img02.jpg" alt="img15" />
+                        <figcaption>
+                            <h2>El Imaginario Jesuita<br/><span>The Jesuit Imagination</span></h2>
+                            <p>2015</p>
+                            <a href="http://bvirtual.bnp.gob.pe/bivi/exposiciones/jesuita/Library.html" target="_blank">View more</a>
+                        </figcaption>
+                    </figure>
+                    <figure class="effect-apollo">
+                        <img src="resources/img/exposiciones/biblioteca-virtual-exposiciones-img03.jpg" alt="img15" />
+                        <figcaption>
+                            <h2>La Santidad en Lima Virreynal<br/><span>Sainthood in Viceregal Lima</span></h2>
+                            <p>2015</p>
+                            <a href="http://bvirtual.bnp.gob.pe/bivi/exposiciones/santidadlima/Library.html" target="_blank">View more</a>
+                        </figcaption>
+                    </figure>
+                    <figure class="effect-apollo">
+                        <img src="resources/img/exposiciones/biblioteca-virtual-exposiciones-img04.jpg" alt="img15" />
+                        <figcaption>
+                            <h2>Joyas de Papel<br/><span>Treasures of Paper</span></h2>
+                            <p>2015</p>
+                            <a href="http://bvirtual.bnp.gob.pe/bivi/exposiciones/joyaspapel/Library.html" target="_blank">View more</a>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <ui:include src="templates/footer.xhtml" />
+            <ui:include src="templates/footer-copy.xhtml" />
+        </main>
+
+        <div class="cd-overlay"></div>
+        <ui:include src="templates/header.xhtml" />
+    </h:body>
+</html>
+

@@ -1,0 +1,104 @@
+@font-face {
+	font-family: 'OpenSans Regular';
+	src: url(resources/fonts/OpenSans-Regular.ttf);
+}
+
+@font-face {
+	font-family: 'OpenSans Light';
+	src: url(resources/fonts/OpenSans-Light.ttf);
+}
+
+@font-face {
+	font-family: 'OpenSans Semibold';
+	src: url(resources/fonts/OpenSans-Semibold.ttf);
+}
+
+section{
+	display:block;
+}
+
+.contenedor-logo-splash{
+	width:100px;
+	height:100px;
+	margin:0 auto;	
+}
+
+#control{
+	font-family:Arial Narrow, Arial, sans-serif;
+	margin:10px auto;
+	width:470px;
+}
+#control span{
+	display:block;
+	float:left;
+	padding:8px 40px;
+	margin:0 10px;
+	color:#333;
+	font-weight:bold;
+	font-size:17px;
+	letter-spacing:1px;
+	cursor:pointer;
+	border-top:1px solid #fff;
+	background:#D1D1D1;
+	background:-webkit-gradient(linear, left top, left bottom, from(#ebebeb), to(#a1a1a1));
+	background:-moz-linear-gradient(top, #ebebeb, #a1a1a1);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ebebeb', endColorstr='#a1a1a1');
+	border-radius:35px;
+	-webkit-border-radius:35px;
+	-moz-border-radius:35px;
+	text-shadow:0 1px 1px #fff;
+	box-shadow:0 1px 1px rgba(0, 0, 0, .2);
+	-moz-box-shadow:0 1px 1px rgba(0, 0, 0, .2);
+	-webkit-box-shadow:0 1px 1px rgba(0, 0, 0, .2);
+}
+#control span.clicked{
+	color:#fff;
+	border-top:1px solid #1F9EE2;
+	text-shadow:0 1px 1px #00273D;
+	background:#D1D1D1;
+	background:-webkit-gradient(linear, left top, left bottom, from(#23A6ED), to(#15577C));
+	background:-moz-linear-gradient(top, #23A6ED, #15577C);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#23A6ED', endColorstr='#15577C');
+}
+
+#wrapper{
+	width:700px;
+	margin:20px auto 40px;
+}
+
+#wrapper .hide{
+	display:none;
+}
+#wrapper ul{
+	list-style:none;
+	position:relative;
+	margin:0 auto;
+	padding:0;
+}
+#wrapper li{
+	float:left;
+	padding:10px;
+	margin:3px;
+	background:#fff;
+	border-bottom:1px solid #ccc;
+	border-right:1px solid #ccc;
+	box-shadow:1px 1px 1px #ccc;
+}
+#wrapper img, #wrapper li div{
+	width:200px;
+	height:133px;
+}
+
+#jSplash{
+	line-height:200%;
+}
+#jSplash h1{
+	margin:10px 0;
+}
+#jSplash h2{
+	line-height:175%;
+}
+
+.clearfix{
+	clear:both;
+}

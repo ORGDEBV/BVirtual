@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+
+        <script src="resources/js/jquery.min.js"></script>
+        <script src="resources/js/jsVinilo.js"></script>
+        <script src="resources/js/jsControles.js"></script>
+        <style>
+            .contentCanvas{
+                width:291px;
+                //display: inline-block;
+                //float: left;
+                background-color: appworkspace;
+                position: relative;
+                // overflow:hidden;
+                text-align: center;
+                margin:auto;
+
+
+            }
+            .contenedor{
+
+                width: 300px;
+                height: 300px;
+                margin: 0 auto;
+
+            }
+            .imgBack{
+                height: auto;
+                max-width: 100%;
+            }
+            .imgDisco{
+                transition: 3s;
+                height: auto;
+                max-width: 100%;
+                transform: translate(0px);
+            }
+            #canvas  
+            {
+
+                margin-top:10px; 
+                border-style:solid; 
+                border-width:0px; 
+                padding:3px; 
+                display:block;
+                -webkit-appearance: none;
+
+                border-radius: 50px;
+                background: #444444;
+                margin: 0 0 0 0%;
+                width: 100%;
+
+            }
+
+            @keyframes rotate {
+                from {
+                    transform: rotate(0deg);
+                }
+
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+            @keyframes stop-rotate {
+                from {
+                    transform: rotate(0deg);
+                }
+
+                to {
+                    transform: rotate(0deg);
+                }
+            }
+        </style>
+    </h:head>
+    <h:body>
+    
+        <div class="contenedor" style="margin-top: 10%" >
+            <img class="imgDisco" src="resources/img/CD.png" style="position:absolute;"></img>
+            <img class="imgBack" src="resources/img/caratula_vinilo.png" style="position:absolute;"></img>
+        </div>
+        <div class="contentCanvas" >
+            
+                <canvas id="canvas"  height="10" style="margin-top: 4px;">    
+                    canvas not supported
+                </canvas>
+           
+
+        </div>
+        <br/>
+        <div class="contentCanvas" style="margin-top: 0px;">
+            
+            <span id="btnPlay" onclick="playAudio();"><img src="resources/images/svg/play.svg"></img></span>
+            <span id="btnPause" onclick="pauseAudio();"><img src="resources/images/svg/pause.svg" ></img></span>                     
+            <span id="btnRetroceder" onclick="rewindAudio();"><img src="resources/images/svg/retroceder.svg" ></img></span>                   
+            <span id="btnAvanzar" onclick="forwardAudio();"><img src="resources/images/svg/adelantar.svg"  ></img></span>                  
+            <span id="btnStop" onclick="restartAudio();"><img src="resources/images/svg/stop.svg" ></img></span>                       
+
+            <span > 
+                <label class="lblProgres" id="process">00:00:00</label>
+            </span>
+            <audio id="myaudio"  style="width: 40%" >
+
+                Your browser does not support the <code>audio</code> tag.
+            </audio>
+            <input type="hidden" id="audiofile"  value="#{audioBean.mvAudios[1]}" />
+
+        </div>
+
+
+    </h:body>
+</html>
+

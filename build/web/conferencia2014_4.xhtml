@@ -1,0 +1,808 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+
+        <meta charset="utf-8"/>
+        <title>Biblioteca Virtual</title>
+        <meta name="description" content="Conferencia Biblioteca Virtual"/>
+        <meta name="author" content="Biblioteca Virtual"/>
+
+        <meta property="og:url" content="http://bvirtual.bnp.gob.pe"/>
+        <meta property="og:type" content="articulo"/>
+        <meta property="og:title" content="Conferencia Biblioteca Virtual"/>
+        <meta property="og:description" content="Quiero compartir esta conferencia"/>
+        <meta property="og:location" content="Peru"/>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="icon" href="resources/img/icon.ico" type="image/ico"/>
+
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:700,800,400' rel='stylesheet' type='text/css' />
+
+        <h:outputStylesheet name="css/internas.css"/>
+        <h:outputStylesheet name="css/reset.css" />
+        <h:outputStylesheet name="css/menu-style.css"/>
+        <h:outputStylesheet name="css/jquery.fancybox.css"/>
+
+        <h:outputScript name="js/jquery.min.js"/>
+        <h:outputScript name="js/jquery-ui.min.js"/>
+        <h:outputScript name="js/jquery.mobile.custom.min.js"/>
+        <h:outputScript name="js/main-menu.js"/>
+        <h:outputScript name="js/modernizr.js"/>
+        <h:outputScript name="js/jquery.slimscroll.min.js"/>
+        <h:outputScript name="js/fb-share.js"/>
+        <h:outputScript name="js/renato.js"/>
+        <h:outputScript name="js/jquery.fancybox.pack.js"/>
+        <h:outputScript name="js/jquery.fancybox.js"/>
+        <h:outputScript name="js/acordion-filtro.js"/>
+        <script>
+            var auxfiltro = 0;
+            var widthInicial = $(window).width();
+            var heightInicial = $(window).height();
+            $(document).ready(function () {
+                $(".various").fancybox({
+                    maxWidth: 800,
+                    maxHeight: 600,
+                    fitToView: false,
+                    width: '70%',
+                    height: '70%',
+                    autoSize: false,
+                    closeClick: true,
+                    openEffect: 'fade',
+                    closeEffect: 'fade',
+                    helpers: {
+                        overlay: {
+                            css: {
+                                'background': 'rgba(0, 0, 0, 0.65)'
+                            }
+                        }
+                    }
+                });
+                $("#btnFiltros").click(function () {
+                    if (auxfiltro == 0) {
+                        $("#filtros-conferencia").css({
+                            'transform': 'translateX(0px)',
+                            '-webkit-transform': 'translateX(0px)'
+                        });
+                        $(".filtros-overlay").css({
+                            'visibility': 'visible'
+                        })
+                        auxfiltro = 1;
+                    } else {
+                        $("#filtros-conferencia").css({
+                            'transform': 'translateX(-230px)',
+                            '-webkit-transform': 'translateX(-230px)'
+                        });
+                        $(".filtros-overlay").css({
+                            'visibility': 'hidden'
+                        })
+                        auxfiltro = 0;
+                    }
+                });
+                $(".filtros-overlay").click(function () {
+                    $("#filtros-conferencia").css({
+                        'transform': 'translateX(-230px)',
+                        '-webkit-transform': 'translateX(-230px)'
+                    });
+                    $(".filtros-overlay").css({
+                        'visibility': 'hidden'
+                    })
+                    auxfiltro = 0;
+                });
+            });
+            $(window).resize(function (event) {
+                $(".filtros-overlay").css({
+                    'visibility': 'hidden'
+                })
+                if (widthInicial != $(window).width()) {
+                    widthInicial = $(window).width();
+                    var width = $(window).width();
+                    if (width > 940) {
+                        $("#filtros-conferencia").css({
+                            'transform': 'translateX(0px)',
+                            '-webkit-transform': 'translateX(0px)'
+                        });
+                        auxfiltro = 1;
+                    } else {
+                        $("#filtros-conferencia").css({
+                            'transform': 'translateX(-230px)',
+                            '-webkit-transform': 'translateX(-230px)'
+                        });
+                        auxfiltro = 0;
+                    }
+                }
+            })
+        </script>
+        <script>
+            $(document).ready(function () {
+                window.twttr = (function (d, s, id) {
+                      var js, fjs = d.getElementsByTagName(s)[0],
+                                t = window.twttr || {};
+                      if (d.getElementById(id))
+                        return t;
+                      js = d.createElement(s);
+                      js.id = id;
+                      js.src = "https://platform.twitter.com/widgets.js";
+                      fjs.parentNode.insertBefore(js, fjs);
+           
+                      t._e = [];
+                      t.ready = function (f) {
+                            t._e.push(f);
+                      };
+           
+                      return t;
+                }(document, "script", "twitter-wjs"));
+            });
+        </script>
+        <script src="https://apis.google.com/js/platform.js" async="async" defer="defer">
+            {
+                lang: 'es'
+            }
+        </script>
+        <script>
+            function copyToClipboard() {
+                var url = window.location.href;
+                var $temp = $("<input/>");
+                $("body").append($temp);
+                $temp.val(url).select();
+                document.execCommand("copy");
+                $temp.remove();
+            }
+        </script>
+    </h:head>
+    <h:body>
+        <!-- Load Facebook SDK for JavaScript -->
+        <div id="fb-root"></div>
+        <header class="cd-main-header">
+            <a class="cd-logo" href="index.xhtml"></a>
+            <ul class="cd-header-buttons">
+                <!--<li><a class="cd-search-trigger" href="#cd-search">Search<span></span></a></li>-->
+                <li><a class="cd-nav-trigger" href="#cd-primary-nav">Menu<span></span></a></li>
+            </ul>
+            <!-- cd-header-buttons -->
+        </header>
+        <main class="cd-main-content">
+            <div class="header-img triangulo-eventos" id="eventos-img">
+            </div>
+            <div id="conferencias-container-overfloW">
+                <div class="left-conferencia" id="filtros-conferencia">
+                    <div id="btnFiltros">
+                        <span id="boton-filtros">
+                            <ui:include src="resources/img/svg/svg-filtros.svg"></ui:include>
+                        </span>
+                    </div>
+                    <ul class="acc" id="acc">
+                        <li>
+                            <h3>Conferencias 2016<span class="triangulito-faq"></span></h3>
+                            <div class="acc-section">
+                                <div class="acc-content">
+                                    <ul class="acc" id="nested">
+                                        <li>
+                                            <h3 class="titulo-conferencia">Febrero</h3>
+                                            <div class="acc-section">
+                                                <div class="acc-content">
+                                                    <a href="conferencia2016_1.xhtml"><h3 class="h3-conferencia">V Programa de Historia del Arte Peruano</h3></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3>Conferencias 2015<span class="triangulito-faq"></span></h3>
+                            <div class="acc-section">
+                                <div class="acc-content">
+                                    <ul class="acc" id="nested2">
+                                        <li>
+                                            <h3>Diciembre</h3>
+                                            <div class="acc-section">
+                                                <div class="acc-content">
+                                                    <a href="conferencia2015_4.xhtml"><h3 class="h3-conferencia">Presentación del libro Nueva Crónica y Buen Gobierno</h3></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <h3>Junio</h3>
+                                            <div class="acc-section">
+                                                <div class="acc-content">
+                                                    <a href="conferencia2015_3.xhtml"><h3 class="h3-conferencia">Garcilaso de la Vega, teólogo de los Incas</h3></a>
+                                                    <a href="conferencia2015_2.xhtml"><h3 class="h3-conferencia">Ecos de Huarochirí: tras las huella de lo indígena en las Américas</h3></a>
+                                                    <a href="conferencia2015_1.xhtml"><h3 class="h3-conferencia">La hoja sagrada: usos y abusos</h3></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <h3>Enero - Febrero</h3>
+                                            <div class="acc-section">
+                                                <div class="acc-content">
+                                                    <a href="conferencia2015_5.xhtml"><h3 class="h3-conferencia">IV Programa de Historia del Arte Peruano</h3></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3 id="añoSelect">Conferencias 2014<span class="triangulito-faq"></span></h3>
+                            <div class="acc-section">
+                                <div class="acc-content">
+                                    <ul class="acc" id="nested3">
+                                        <li>
+                                            <h3>Diciembre</h3>
+                                            <div class="acc-section">
+                                                <div class="acc-content">
+                                                    <a href="conferencia2014_1.xhtml"><h3 class="h3-conferencia">Orígenes, mitos y fiestas del Imperio inca</h3></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <h3>Junio</h3>
+                                            <div class="acc-section">
+                                                <div class="acc-content">
+                                                    <a href="conferencia2014_2.xhtml"><h3 class="h3-conferencia">Cultura Ambiental en el Perú: desafíos y experiencias"</h3></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <h3>Abril</h3>
+                                            <div class="acc-section">
+                                                <div class="acc-content">
+                                                    <a href="conferencia2014_3.xhtml"><h3 class="h3-conferencia">Dr. David Samadi y el Robot Da Vinci</h3></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <h3 id="mesSelect">Enero - Febrero</h3>
+                                            <div class="acc-section">
+                                                <div class="acc-content">
+                                                    <a href="conferencia2014_4.xhtml"><h3 class="h3-conferencia h3-conferencia-selected">III Programa de Historia del Arte Peruano</h3></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <h3>Conferencias 2013<span class="triangulito-faq"></span></h3>
+                            <div class="acc-section">
+                                <div class="acc-content">
+                                    <ul class="acc" id="nested4">
+                                        <li>
+                                            <h3>Diciembre</h3>
+                                            <div class="acc-section">
+                                                <div class="acc-content">
+                                                    <a href="conferencia2013_1.xhtml"><h3 class="h3-conferencia">El derecho de autor y el fomento de la lectura en la era digital</h3></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <h3>Agosto</h3>
+                                            <div class="acc-section">
+                                                <div class="acc-content">
+                                                    <a href="conferencia2013_2.xhtml"><h3 class="h3-conferencia">La cultura del libro: aproximaciones desde la historia y el arte</h3></a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div id="filtros-conferencia-bg"></div>
+                </div>
+                <div class="right-conferencia">
+                    <div class="filtros-overlay"></div>
+                    <div class="site-map">
+                        <div class="left">
+                            <p>Eventos</p>
+                        </div>
+                        <a href="conferencias.xhtml">
+                            <div class="right active-eventos">
+                                <p>Conferencias</p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="box-comment">
+                        <div>
+                            <a onclick="copyToClipboard()" style="cursor:pointer;"><img src="resources/img/copiar_enlace.png" alt=""/></a>
+                            <div class="g-plus" data-action="share" data-annotation="bubble" data-height="20"></div>
+                            <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+                            <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-mobile-iframe="true"></div>
+                        </div>
+                    </div>
+
+                    <div class="conferencia-head">
+                        <h2>Curso</h2>
+                        <h1>III Programa de Historia del Arte Peruano</h1>
+                        <div class="titular conferencia-texto">
+                            <img src="resources/img/conferencias/biblioteca-virtual-conferencia-2014-04.png" alt="" />
+                            <div>
+                                <p>"La Biblioteca Nacional del Perú (BNP) organizó el III Programa de Historia del Arte Peruano para docentes y público en general, cuyos temas comprendieron desde el arte prehispánico hasta el arte contemporáneo. Este curso, que tiene como propósito desarrollar un panorama general del arte, tuvo como ponentes a destacados expertos como Luis Guillermo Lumbreras, Ruth Shady, Fernando de Szyszlo, Luis Enrique Tord, Ricardo Estabridis, Jorge Villacorta, Gustavo Buntinx, entre otros."</p>
+                                <p>Fecha: del 27 de enero al 21 de febrero de 2014</p>
+                                <p>Auditorio: Mario Vargas Llosa (San Borja)</p>
+                                <a class="various fancybox.iframe conferencia-completa" href="http://www.youtube.com/embed/playlist?list=PLw-7dkDed4ovciK2_pV2Vm-gMhcJ_Zbuq"><img src="resources\img\youtube_icon.png" alt=""></img>Ver conferencia completa</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Lunes 27 de enero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble doble-100">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/kny4r63B1J0"><img src="http://i2.ytimg.com/vi/kny4r63B1J0/1.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Introducción al arte antiguo peruano</h3>
+                                    <p>Luis Lumbreras</p>
+                                    <p>Ponencia</p>
+                                    <p>El antropólogo Luis Lumbreras hablará desde una perspectiva cultural acerca del arte antiguo peruano.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Martes 28 de enero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/aHCyG5k2PPo"><img src="http://i2.ytimg.com/vi/aHCyG5k2PPo/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Los tejidos peruanos precolombinos, el primer auténtico arte moderno</h3>
+                                    <p>James W. Reid</p>
+                                    <p>Ponencia</p>
+                                    <p>El gran especialista en arte textil a nivel mundial James Reid revalorizó la textilería peruana y su legado a través del tiempo.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="doble">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/28wSH_C0QDc"><img src="http://i2.ytimg.com/vi/28wSH_C0QDc/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>La metalurgia ancestral precolombina: Investigaciones y estado de la cuestión</h3>
+                                    <p>Paloma Carcedo</p>
+                                    <p>Ponencia</p>
+                                    <p>La curadora e historiadora de Arte Paloma Carcedo abordó el tema de las investigaciones acerca de la obtención, transformación y manipulación de los metales en diversas culturas del Perú y de la América prehispánica.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Miércoles 29 de enero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble doble-100">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/-5NclN2-qUY"><img src="http://i2.ytimg.com/vi/-5NclN2-qUY/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Perú, país megadiverso, pluricultural y multilingüe pero integrado desde la formación de Caral</h3>
+                                    <p>Ruth Shady</p>
+                                    <p>Ponencia</p>
+                                    <p>La destacada arqueóloga y docente Ruth Shady expuso acerca de la diversidad geográfica, lingüística y social del Perú desde tiempos ancestrales, ante la cual la cultura Caral marcaría una ruptura mediante su integración a nivel social, política y cultural.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="conferencia-cronograma">
+                        <p>Jueves 30 de enero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble doble-100">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/agYVGhWxkBc"><img src="http://i2.ytimg.com/vi/agYVGhWxkBc/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Lima milenaria, arqueología y gestión</h3>
+                                    <p>Mario Advíncula</p>
+                                    <p>Ponencia</p>
+                                    <p>El arqueólogo Mario Advíncula versó acerca de la historia prehispánica de Lima desde el punto de vista territorial a través de las interacciones de la costa central peruana con otras regiones.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Lunes 03 de febrero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble doble-100">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/UO8tCyIT1hA"><img src="http://i2.ytimg.com/vi/UO8tCyIT1hA/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Iconografías y estilos del arte virreinal peruano: del manierismo europeo al renacimiento inca</h3>
+                                    <p>Cécile Michaud</p>
+                                    <p>Ponencia</p>
+                                    <p>La historiadora presentó sus estudios acerca de la pintura virreinal puntualizando la iconografía y el estilo presente en diversas obras de dicho periodo.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Martes 04 de febrero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble doble-100">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/PsRnYFTgCn8"><img src="http://i2.ytimg.com/vi/PsRnYFTgCn8/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Lecturas raciales de lo indio, mestizo y criollo en la pintura virreinal peruana</h3>
+                                    <p>Ramón Mujica</p>
+                                    <p>Ponencia</p>
+                                    <p>El director de la Biblioteca Nacional del Perú habló del mundo interpretativo de las pinturas virreinales, su realización por parte de pintores indígenas y mestizos, así como de los discursos contenidos en ellas.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Miércoles 05 de febrero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble doble-100">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/tACRPHHQpAw"><img src="http://i2.ytimg.com/vi/tACRPHHQpAw/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Templos coloniales del Colca, Arequipa</h3>
+                                    <p>Luis Enrique Tord</p>
+                                    <p>Ponencia</p>
+                                    <p>El historiador y narrador Luis Enrique Tord refirió parte de sus investigaciones en 16 templos católicos y una capilla renacentista erigidos en el Valle del Colca entre los siglos XVI y XIV.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Jueves 06 de febrero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble doble-100">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/gm-x9DC5BY0"><img src="http://i2.ytimg.com/vi/gm-x9DC5BY0/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>La vida de San Agustín en la pintura cusqueña</h3>
+                                    <p>Ricardo Estabridis</p>
+                                    <p>Ponencia</p>
+                                    <p>El doctor en Geografía e Historia Ricardo Estabridis Cárdenas abordó con especial atención la vida del santo católico plasmadas en dos series de obras realizadas por pintores cuzqueños en el siglo XVIII.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Viernes 07 de febrero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble doble-100">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/falta"><img src="http://i2.ytimg.com/vi/falta/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Museo de Arte Religioso de la Catedral de Lima</h3>
+                                    <p>Fernando López</p>
+                                    <p>Ponencia</p>
+                                    <p>falta texto</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Lunes 10 de febrero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble doble-100">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/falta"><img src="http://i2.ytimg.com/vi/falta/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>La pintura virreinal limeña en el siglo XVIII</h3>
+                                    <p>Ricardo Kusunoki</p>
+                                    <p>Ponencia</p>
+                                    <p>falta texto</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Martes 11 de febrero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble doble-100">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/r2nnkN_XqkU"><img src="http://i2.ytimg.com/vi/r2nnkN_XqkU/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Luis Montero, los funerales de Atahualpa y el academicismo del siglo XIX</h3>
+                                    <p>Marco I. Cabrera Hernández</p>
+                                    <p>Ponencia</p>
+                                    <p>El historiador de Arte y director del Instituto Cultural del Arte Peruano Marco I. Cabrera Hernández enfatizó la importancia de la obra del retratista peruano decimonónico cuya formación académica lo llevó a Florencia y fue injustamente incomprendido y opacado por la tradición vanguardista.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Miércoles 12 de febrero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble doble-100">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/nRH2O8MODeI"><img src="http://i2.ytimg.com/vi/nRH2O8MODeI/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>De la dicotomía virreinal al Estado Nación peruano: mirada de identidad en la pintura peruana del siglo XIX y XX</h3>
+                                    <p>Fernando Villegas</p>
+                                    <p>Ponencia</p>
+                                    <p>El doctor en Historia del Arte invitó a dar una mirada a la construcción de un imaginario nacional peruano a partir de la independencia.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Jueves 13 de febrero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble doble-100">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/3WGTH1bcv3E"><img src="http://i2.ytimg.com/vi/3WGTH1bcv3E/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Fotografía, siglos XIX y XX</h3>
+                                    <p>Jorge Villacorta</p>
+                                    <p>Ponencia</p>
+                                    <p>El genetista, crítico de arte y curador independiente expuso una investigación realizada de manera conjunta con el historiador de la fotografía Andrés Garay, tratando temas como la fotogenia evidenciada a fines del siglo XIX y principios del siguiente.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Viernes 14 de febrero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble doble-100">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/-USs2c6DrSU"><img src="http://i2.ytimg.com/vi/-USs2c6DrSU/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Museo Nacional de Arqueología, Antropología e Historia del Perú</h3>
+                                    <p>Alexander Ortegal, Manuel Merino y Jaime Mariazza</p>
+                                    <p>Ponencia</p>
+                                    <p>El historiador Alexander Ortegal, el curador Manuel Merino y el docente sanmarquino Jaime Mariazza participaron en representación del Museo Nacional de Arqueología, Antropología e Historia del Perú y dialogaron sobre las colecciones con que cuenta este recinto.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Lunes 17 de febrero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble doble-100">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/kuYteGUwQlc"><img src="http://i2.ytimg.com/vi/kuYteGUwQlc/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Escultura funeraria en Lima, el Presbítero Maestro</h3>
+                                    <p>Alfonso Castrillón</p>
+                                    <p>Ponencia</p>
+                                    <p>El crítico e historiador de Arte Alfonso Castrillón impartió sus conocimientos de la construcción y la simbología de las esculturas y otros motivos funerarios de uno de los cementerios históricos más famosos de América Latina.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Martes 18 de febrero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble doble-100">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/YB_SyoPZlHM"><img src="http://i2.ytimg.com/vi/YB_SyoPZlHM/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>El nacimiento del Arte Moderno</h3>
+                                    <p>Fernando de Szyszlo</p>
+                                    <p>Ponencia</p>
+                                    <p>El célebre artista peruano Fernando de Szyszlo discutió el origen de esta nueva tendencia en la historia del Arte a partir de diversos descubrimientos científicos y circunstancias sociales a fines del siglo XIX.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Miércoles 19 de febrero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/BnUJEnuzWPQ"><img src="http://i2.ytimg.com/vi/BnUJEnuzWPQ/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Mario Urteaga y Juan Manuel Figuero Aznar</h3>
+                                    <p>Gustavo Buntinx</p>
+                                    <p>Ponencia</p>
+                                    <p>El historiador, curador y crítico de Arte habló primordialmente sobre la figura y el legado artístico de Juan Manuel Figuero, pintor y fotógrafo peruano.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="doble">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/HReyr4aUwQk"><img src="http://i2.ytimg.com/vi/HReyr4aUwQk/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Del teatro a la calle: estrategias artísticas del siglo XX para reencantar la vida</h3>
+                                    <p>Patricia Ciriani</p>
+                                    <p>Ponencia</p>
+                                    <p>La historiadora del arte y de la arquitectura, periodista y curadora independiente intervino repasando el desarrollo del arte contemporáneo internacional y dio énfasis en cuanto a estrategias teatrales de amplia práctica local y mundial como el performance y el happening.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Jueves 20 de febrero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/0_Bp1qZ2lNU"><img src="http://i2.ytimg.com/vi/0_Bp1qZ2lNU/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Pintura contemporánea de la selva</h3>
+                                    <p>María Eugenia Yllia</p>
+                                    <p>Ponencia</p>
+                                    <p>La coordinadora del Centro de Documentación de Arte Peruano Contemporáneo (CDAPC) amplió la visión de de los asistentes gracias a su ponencia acerca de las manifestaciones artísticas provenientes de la amazonía peruana.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="doble">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/u2O4ULCmwZw"><img src="http://i2.ytimg.com/vi/u2O4ULCmwZw/2.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Arte popular</h3>
+                                    <p>Jesús Urbano</p>
+                                    <p>Ponencia</p>
+                                    <p>El maestro y artista ayacuchano, retablista de tierra adentro, Jesús Urbano Rojas falleció el 21 de mayo del presente año. Tres meses antes, el maestro Urbano participó en el III Curso de Historia del Arte Peruano.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="conferencia-cronograma">
+                        <p>Viernes 21 de febrero de 2014</p>
+                    </div>
+                    <div class="row-cronograma clearfix">
+                        <div class="doble">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/jW2YgsZf0Pw"><img src="http://i2.ytimg.com/vi/jW2YgsZf0Pw/1.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Arte Contemporáneo</h3>
+                                    <p>Hernán Pazos</p>
+                                    <p>Ponencia</p>
+                                    <p>El artista visual Hernán Pazos narró anécdotas de su trayectoria vital y profesional durante las décadas de 1980 y 1990 tras su retorno al Perú, del cual manifestó que tuvo poco acceso a las tendencias artísticas de entonces.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="doble">
+                            <div>
+                                <ul class="list">
+                                    <li>
+                                        <a class="various fancybox.iframe" href="http://www.youtube.com/embed/9aQSxbUvAnY"><img src="http://i2.ytimg.com/vi/9aQSxbUvAnY/1.jpg" alt=""></img></a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <h3>Museo de Arte Contemporáneo</h3>
+                                    <p>Elisa Granda-Juan Peralta</p>
+                                    <p>Ponencia</p>
+                                    <p>La educadora Elisa Granda y el historiador Juan Peralta explicaron la colección y los lineamientos del programa de exposiciones temporales del Museo de Arte Contemporáneo; así como el programa educativo que se ofrece alrededor de la colección de arte moderno y contemporáneo, y las dinámicas educativas alrededor de la programación de exposiciones de este recinto cultural.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--cierre de div-->
+                <ui:include src="templates/footer.xhtml" />
+                <ui:include src="templates/footer-copy.xhtml" />
+            </div>
+        </main>
+
+        <div class="cd-overlay"></div>
+        <ui:include src="templates/header.xhtml" />
+
+        <script type="text/javascript" src="resources/js/accordion.js"></script>
+
+        <script type="text/javascript">
+                                var parentAccordion = new TINY.accordion.slider("parentAccordion");
+                                parentAccordion.init("acc", "h3", 1, -1);
+
+                                var nestedAccordion = new TINY.accordion.slider("nestedAccordion");
+                                nestedAccordion.init("nested", "h3", 1, -1, "acc-selected");
+
+                                var nestedAccordion2 = new TINY.accordion.slider("nestedAccordion2");
+                                nestedAccordion2.init("nested2", "h3", 1, -1, "acc-selected");
+
+                                var nestedAccordion3 = new TINY.accordion.slider("nestedAccordion3");
+                                nestedAccordion3.init("nested3", "h3", 1, -1, "acc-selected");
+
+                                var nestedAccordion4 = new TINY.accordion.slider("nestedAccordion4");
+                                nestedAccordion4.init("nested4", "h3", 1, -1, "acc-selected");
+        </script>
+    </h:body>
+</html>
+
